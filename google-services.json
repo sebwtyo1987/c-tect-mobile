@@ -1,1 +1,30 @@
-contoh file
+{
+  "project_info": {
+    "project_number": "336666280816",
+    "firebase_url": "https://ctech-mobile-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "ctech-mobile",
+    "storage_bucket": "ctech-mobile.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:336666280816:android:b6f8bb0f37ee5b9a7b05b5",
+        "android_client_info": {
+          "package_name": "com.ctech.mobile"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBaF2eNzHRSUyOTSITQkPnPVQPgOXMrobc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

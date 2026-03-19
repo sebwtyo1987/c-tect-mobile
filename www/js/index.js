@@ -44,6 +44,7 @@ function onDeviceReady() {
     initBackgroundModeEvents();
     initLocalNotificationListeners();
     createSecureStorage();
+    fetchAndLogFirebaseToken();
 
     writeLog("Device ready aktif. Plugin utama sudah diinisialisasi.");
 }
@@ -322,6 +323,30 @@ function setupFirebaseNotifications() {
         local ? "ok" : "error"
     );
     writeLog("Saat aplikasi tertutup, notifikasi tetap harus dikirim dari payload FCM native agar muncul dari sistem Android.");
+}
+
+function fetchAndLogFirebaseToken() {
+    var firebase = getFirebasePlugin();
+
+    if (!firebase || !firebase.getToken) {
+        writeLog("Firebase token tidak bisa diambil karena plugin belum tersedia.");
+        return;
+    }
+
+    firebase.getToken(
+        function (token) {
+            if (!token) {
+                writeLog("Firebase token kosong.");
+                return;
+            }
+
+            setPanelStatus("status-firebase", "Token siap dipakai", "ok");
+            writeLog("Firebase token device: " + token);
+        },
+        function (error) {
+            writeLog("Gagal mengambil Firebase token: " + formatError(error));
+        }
+    );
 }
 
 function showLocalNotificationFromFirebase(firebaseMessage) {
