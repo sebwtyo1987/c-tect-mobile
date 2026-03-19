@@ -6,19 +6,21 @@ on:
 jobs:
   release-android:
     runs-on: ubuntu-latest
+    env:
+      FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: "true"
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Setup Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 20
           cache: npm
 
       - name: Setup Java
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           distribution: temurin
           java-version: 17
@@ -29,14 +31,17 @@ jobs:
       - name: Install project dependencies
         run: npm ci
 
+      - name: Install Cordova CLI
+        run: npm install -g cordova@12
+
       - name: Restore Android release keystore
         run: |
           echo "${{ secrets.ANDROID_KEYSTORE_BASE64 }}" | base64 --decode > release.keystore
 
       - name: Ensure Cordova Android platform
         run: |
-          npx cordova platform remove android || true
-          npx cordova platform add android@15.0.0
+          cordova platform remove android || true
+          cordova platform add android@15.0.0
 
       - name: Create release build config
         run: |
@@ -55,7 +60,7 @@ jobs:
           EOF
 
       - name: Build signed Android release APK
-        run: npx cordova build android --release --buildConfig=build.json
+        run: cordova build android --release --buildConfig=build.json
 
       - name: Upload signed APK artifact
         uses: actions/upload-artifact@v4
