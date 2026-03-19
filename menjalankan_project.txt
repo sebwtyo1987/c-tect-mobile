@@ -1,0 +1,226 @@
+Panduan Menjalankan Project Cordova ctech-mobile
+
+Catatan:
+- Panduan ini dibuat sebagai acuan kerja manual.
+- Jalankan semua perintah dari folder project: /home/laptop/ctech-mobile
+- Project ini memakai Cordova dengan target Android dan iOS, tetapi langkah paling umum di bawah fokus ke Android terlebih dahulu.
+
+1. Persiapan tools dasar
+
+Install tools berikut di komputer:
+- Node.js LTS
+- npm
+- Java JDK 17 atau versi yang sesuai dengan Android build tools
+- Android Studio
+- Android SDK dan Android SDK Platform
+- Gradle biasanya akan diurus oleh Android Studio / Cordova Android
+
+Cek versi setelah install:
+```bash
+node -v
+npm -v
+java -version
+```
+
+2. Install Cordova CLI
+
+Jika Cordova belum terpasang global:
+```bash
+npm install -g cordova
+```
+
+Cek hasil install:
+```bash
+cordova -v
+```
+
+3. Masuk ke folder project
+
+```bash
+cd /home/laptop/ctech-mobile
+```
+
+4. Install dependency project
+
+Karena project memakai package.json, jalankan:
+```bash
+npm install
+```
+
+Jika ingin install tanpa mengubah versi package:
+```bash
+npm install
+```
+
+Setelah selesai, pastikan folder `node_modules` sudah terbentuk.
+
+5. Tambahkan platform Cordova
+
+Untuk Android:
+```bash
+cordova platform add android
+```
+
+Untuk iOS, jika Anda build di macOS:
+```bash
+cordova platform add ios
+```
+
+Jika platform sudah pernah ditambahkan dan ingin sinkronkan ulang:
+```bash
+cordova prepare
+```
+
+6. Pastikan file konfigurasi Firebase Android tersedia
+
+File berikut harus ada:
+```bash
+google-services.json
+```
+
+Di project ini file tersebut sudah ada. Pastikan isinya sesuai package app:
+- package name: `com.ctech.mobile`
+
+7. Install plugin yang dipakai project
+
+Jika `npm install` dan `cordova prepare` belum otomatis menarik plugin, Anda bisa pasang manual satu per satu.
+
+Plugin utama:
+```bash
+cordova plugin add cordova-plugin-firebasex
+cordova plugin add cordova-custom-config
+cordova plugin add cordova-plugin-dialogs
+cordova plugin add cordova.plugins.diagnostic
+cordova plugin add cordova-plugin-androidx-adapter
+cordova plugin add cordova-plugin-local-notification
+cordova plugin add cordova-plugin-background-mode
+cordova plugin add cordova-plugin-device
+cordova plugin add cordova-plugin-fullscreen
+cordova plugin add cordova-plugin-geolocation
+cordova plugin add cordova-plugin-statusbar
+cordova plugin add cordova-plugin-secure-storage-echo
+```
+
+Khusus plugin dialogs, bila perlu versi repo sesuai package.json:
+```bash
+cordova plugin add github:dpa99c/cordova-plugin-dialogs
+```
+
+8. Sinkronkan project setelah plugin terpasang
+
+```bash
+cordova prepare
+```
+
+Untuk memastikan platform dan plugin terbaca:
+```bash
+cordova platform ls
+cordova plugin ls
+```
+
+9. Build project Android
+
+```bash
+cordova build android
+```
+
+Jika build berhasil, file hasil build biasanya akan muncul di folder `platforms/android`.
+
+10. Jalankan di emulator Android
+
+```bash
+cordova emulate android
+```
+
+11. Jalankan di device Android yang terhubung USB
+
+Aktifkan:
+- Developer Options
+- USB Debugging
+
+Lalu jalankan:
+```bash
+cordova run android
+```
+
+12. Jika ada perubahan file web atau plugin
+
+Setelah mengubah file `www`, `config.xml`, atau plugin:
+```bash
+cordova prepare
+```
+
+Jika perlu build ulang:
+```bash
+cordova build android
+```
+
+13. Jika platform error atau ingin reset environment Cordova
+
+Hapus dan tambah ulang platform Android:
+```bash
+cordova platform rm android
+cordova platform add android
+cordova prepare
+```
+
+14. Hal yang perlu dicek bila gagal build
+
+Periksa hal berikut:
+- Node.js sudah terinstall
+- Cordova CLI sudah terinstall
+- Android Studio dan SDK sudah lengkap
+- JAVA_HOME sudah benar
+- ANDROID_HOME atau ANDROID_SDK_ROOT sudah benar
+- `google-services.json` ada di root project
+- nama package di Firebase cocok dengan `com.ctech.mobile`
+
+15. Perintah kerja harian yang paling sering dipakai
+
+Install dependency:
+```bash
+npm install
+```
+
+Sinkronkan Cordova:
+```bash
+cordova prepare
+```
+
+Build Android:
+```bash
+cordova build android
+```
+
+Jalankan ke device:
+```bash
+cordova run android
+```
+
+Lihat plugin:
+```bash
+cordova plugin ls
+```
+
+Lihat platform:
+```bash
+cordova platform ls
+```
+
+16. Urutan kerja yang disarankan dari awal
+
+```bash
+cd /home/laptop/ctech-mobile
+npm install
+cordova platform add android
+cordova prepare
+cordova plugin ls
+cordova build android
+cordova run android
+```
+
+17. Catatan tambahan untuk project ini
+
+- Isi folder `www` saat ini masih template dasar Cordova, jadi walaupun build berhasil, tampilan app masih sederhana.
+- File `config.xml` dan `package.json` sudah mulai dirapikan, tetapi konfigurasi icon, splash, dan preference Cordova lain belum lengkap.
+- Jika nanti ada plugin yang gagal install, pasang satu per satu lalu cek pesan error spesifiknya.

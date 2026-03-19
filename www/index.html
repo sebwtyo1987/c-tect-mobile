@@ -1,49 +1,178 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
-<html>
+<html lang="id">
     <head>
         <meta charset="utf-8">
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-            https://cordova.apache.org/docs/en/latest/
-        Some notes:
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
+        <meta
+            http-equiv="Content-Security-Policy"
+            content="default-src 'self' data: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"
+        >
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="initial-scale=1, width=device-width, viewport-fit=cover">
-        <meta name="color-scheme" content="light dark">
+        <link rel="icon" href="data:,">
         <link rel="stylesheet" href="css/index.css">
-        <title>Hello World</title>
+        <title>ctech-mobile plugin test</title>
     </head>
     <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
-        </div>
+        <main class="app-shell">
+            <section class="hero">
+                <div class="hero__label">Cordova Plugin Test Console</div>
+                <h1>ctech-mobile</h1>
+                <p class="hero__text">
+                    Halaman ini dipakai untuk mencoba plugin Cordova yang sudah terpasang
+                    langsung dari aplikasi setelah `deviceready` aktif.
+                </p>
+                <div class="hero__meta">
+                    <span class="badge" id="ready-badge">Menunggu deviceready</span>
+                    <span class="badge badge--soft" id="platform-badge">Platform belum terdeteksi</span>
+                </div>
+            </section>
+
+            <section class="overview-grid">
+                <article class="overview-card">
+                    <h2>Device Runtime</h2>
+                    <ul class="stat-list" id="runtime-info">
+                        <li>Status Cordova: belum siap</li>
+                        <li>Platform: belum tersedia</li>
+                        <li>Versi Cordova: belum tersedia</li>
+                        <li>Model Device: belum tersedia</li>
+                    </ul>
+                </article>
+
+                <article class="overview-card">
+                    <h2>Plugin Non Runtime</h2>
+                    <ul class="stat-list">
+                        <li>`cordova-custom-config` bekerja saat prepare/build</li>
+                        <li>`cordova-plugin-androidx-adapter` bekerja saat prepare/build</li>
+                    </ul>
+                </article>
+            </section>
+
+            <section class="panel-grid">
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Device</h2>
+                        <span class="panel__status" id="status-device">Belum dicek</span>
+                    </div>
+                    <p>Cek informasi device dari `cordova-plugin-device`.</p>
+                    <div class="actions">
+                        <button data-action="device-refresh">Refresh Device Info</button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Dialogs</h2>
+                        <span class="panel__status" id="status-dialogs">Belum dicek</span>
+                    </div>
+                    <p>Uji `navigator.notification` dari `cordova-plugin-dialogs`.</p>
+                    <div class="actions">
+                        <button data-action="dialogs-alert">Alert</button>
+                        <button data-action="dialogs-confirm">Confirm</button>
+                        <button data-action="dialogs-beep">Beep</button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Geolocation</h2>
+                        <span class="panel__status" id="status-geolocation">Belum dicek</span>
+                    </div>
+                    <p>Ambil lokasi terbaru dari `cordova-plugin-geolocation`.</p>
+                    <div class="actions">
+                        <button data-action="geo-current">Get Current Position</button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Diagnostic</h2>
+                        <span class="panel__status" id="status-diagnostic">Belum dicek</span>
+                    </div>
+                    <p>Cek status lokasi dan notifikasi dari `cordova.plugins.diagnostic`.</p>
+                    <div class="actions">
+                        <button data-action="diagnostic-location-status">Cek Lokasi</button>
+                        <button data-action="diagnostic-location-request">Izin Lokasi</button>
+                        <button data-action="diagnostic-notification-status">Cek Notifikasi</button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>FirebaseX</h2>
+                        <span class="panel__status" id="status-firebase">Belum dicek</span>
+                    </div>
+                    <p>Pesan Firebase akan dipantau otomatis. Saat app aktif, pesan masuk akan dibuat menjadi local notification.</p>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Local Notification</h2>
+                        <span class="panel__status" id="status-local-notification">Belum dicek</span>
+                    </div>
+                    <p>Dipakai otomatis untuk menampilkan pesan Firebase saat aplikasi sedang terbuka, dengan logo dan sound aplikasi.</p>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Background Mode</h2>
+                        <span class="panel__status" id="status-background">Belum dicek</span>
+                    </div>
+                    <p>Aktifkan mode background untuk uji plugin.</p>
+                    <div class="actions">
+                        <button data-action="background-enable">Enable</button>
+                        <button data-action="background-disable">Disable</button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Fullscreen</h2>
+                        <span class="panel__status" id="status-fullscreen">Belum dicek</span>
+                    </div>
+                    <p>Masuk dan keluar dari immersive mode Android.</p>
+                    <div class="actions">
+                        <button data-action="fullscreen-enter">Immersive</button>
+                        <button data-action="fullscreen-reset">Reset</button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>StatusBar</h2>
+                        <span class="panel__status" id="status-statusbar">Belum dicek</span>
+                    </div>
+                    <p>Uji show, hide, dan ganti warna status bar.</p>
+                    <div class="actions">
+                        <button data-action="statusbar-show">Show</button>
+                        <button data-action="statusbar-hide">Hide</button>
+                        <button data-action="statusbar-color">Set Color</button>
+                    </div>
+                </article>
+
+                <article class="panel">
+                    <div class="panel__head">
+                        <h2>Secure Storage</h2>
+                        <span class="panel__status" id="status-secure-storage">Belum dicek</span>
+                    </div>
+                    <p>Simpan dan baca data contoh dari secure storage.</p>
+                    <div class="actions">
+                        <button data-action="secure-set">Save Sample</button>
+                        <button data-action="secure-get">Read Sample</button>
+                        <button data-action="secure-remove">Remove Sample</button>
+                    </div>
+                </article>
+            </section>
+
+            <section class="log-panel">
+                <div class="panel__head">
+                    <h2>Log Console</h2>
+                    <button class="button-secondary" data-action="log-clear">Clear Log</button>
+                </div>
+                <pre id="app-log">Menunggu deviceready...</pre>
+            </section>
+        </main>
+
         <script src="cordova.js"></script>
         <script src="js/index.js"></script>
     </body>

@@ -1,0 +1,79 @@
+{
+  "catatan": {
+    "tujuan": "Contoh payload Firebase Cloud Messaging untuk project ctech-mobile",
+    "channel_android": "fcm_default_channel",
+    "small_icon": "notification_icon",
+    "large_icon": "notification_icon_large",
+    "sound": "notif",
+    "keterangan": [
+      "Jika aplikasi tertutup atau background, gunakan payload notification Android agar sistem menampilkan push notification native.",
+      "Jika aplikasi sedang foreground, index.js akan menangkap pesan Firebase lalu membuat local notification dengan logo dan sound yang sama."
+    ]
+  },
+  "contoh_background_atau_tertutup": {
+    "message": {
+      "token": "ISI_FCM_TOKEN_DI_SINI",
+      "notification": {
+        "title": "Pesanan Baru",
+        "body": "Ada pesanan baru yang perlu segera diproses."
+      },
+      "android": {
+        "priority": "HIGH",
+        "notification": {
+          "channel_id": "fcm_default_channel",
+          "sound": "notif",
+          "icon": "notification_icon",
+          "image": "",
+          "default_sound": false,
+          "default_vibrate_timings": true
+        }
+      },
+      "data": {
+        "type": "order",
+        "order_id": "INV-20260319-001",
+        "title": "Pesanan Baru",
+        "body": "Ada pesanan baru yang perlu segera diproses.",
+        "click_action": "FCM_PLUGIN_ACTIVITY"
+      }
+    }
+  },
+  "contoh_foreground_data_dan_notifikasi_lokal": {
+    "message": {
+      "token": "ISI_FCM_TOKEN_DI_SINI",
+      "data": {
+        "type": "chat",
+        "chat_id": "ROOM-01",
+        "title": "Pesan Masuk",
+        "body": "Anda menerima pesan baru dari tim sales.",
+        "message": "Anda menerima pesan baru dari tim sales."
+      },
+      "android": {
+        "priority": "HIGH"
+      }
+    }
+  },
+  "contoh_promosi_dengan_logo_dan_suara": {
+    "message": {
+      "token": "ISI_FCM_TOKEN_DI_SINI",
+      "notification": {
+        "title": "Promo Hari Ini",
+        "body": "Diskon khusus pelanggan aktif tersedia sekarang."
+      },
+      "android": {
+        "priority": "HIGH",
+        "notification": {
+          "channel_id": "fcm_default_channel",
+          "sound": "notif",
+          "icon": "notification_icon",
+          "default_sound": false
+        }
+      },
+      "data": {
+        "type": "promo",
+        "promo_code": "CTECH2026",
+        "title": "Promo Hari Ini",
+        "body": "Diskon khusus pelanggan aktif tersedia sekarang."
+      }
+    }
+  }
+}

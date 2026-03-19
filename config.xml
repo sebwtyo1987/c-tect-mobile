@@ -1,11 +1,39 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ctech.mobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0">
+<widget id="com.ctech.mobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
     <name>ctech-mobile</name>
-    <description>Sample Apache Cordova App</description>
-    <author email="dev@cordova.apache.org" href="https://cordova.apache.org">
-        Apache Cordova Team
+    <description>aplikasi client sales untuk ctech</description>
+    <author email="tyosebwtyo@gmail.com">
+        tyosebwtyo
     </author>
     <content src="index.html" />
+    <icon src="res/icon.png" />
+    <platform name="android">
+        <!-- Icons -->
+        <icon density="ldpi" src="res/android/icon/drawable-ldpi-icon.png" />
+        <icon density="mdpi" src="res/android/icon/drawable-mdpi-icon.png" />
+        <icon density="hdpi" src="res/android/icon/drawable-hdpi-icon.png" />
+        <icon density="xhdpi" src="res/android/icon/drawable-xhdpi-icon.png" />
+        <icon density="xxhdpi" src="res/android/icon/drawable-xxhdpi-icon.png" />
+        <icon density="xxxhdpi" src="res/android/icon/drawable-xxxhdpi-icon.png" />
+        
+        <!-- Notification Icons -->
+        <resource-file src="res/android/notification/drawable-mdpi-icon.png" target="app/src/main/res/drawable-mdpi/notification_icon.png" />
+        <resource-file src="res/android/notification/drawable-hdpi-icon.png" target="app/src/main/res/drawable-hdpi/notification_icon.png" />
+        <resource-file src="res/android/notification/drawable-xhdpi-icon.png" target="app/src/main/res/drawable-xhdpi/notification_icon.png" />
+        <resource-file src="res/android/notification/drawable-xxhdpi-icon.png" target="app/src/main/res/drawable-xxhdpi/notification_icon.png" />
+        <resource-file src="res/android/notification/drawable-xxxhdpi-icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon.png" />
+
+        <!-- Large Notification Icon -->
+        <resource-file src="res/icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon_large.png" />
+        
+        <!-- Sound -->
+        <resource-file src="res/raw/notif.mp3" target="app/src/main/res/raw/notif.mp3" />
+        
+        <!-- Splash Screen -->
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="icon" />
+        <preference name="AndroidWindowSplashScreenBackground" value="#FFFFFF" />
+        <preference name="AndroidWindowSplashScreenDuration" value="3000" />
+    </platform>
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 </widget>
