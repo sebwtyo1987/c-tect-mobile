@@ -1,0 +1,49 @@
+name: Build Cordova Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - master
+
+jobs:
+  build-android:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install project dependencies
+        run: npm ci
+
+      - name: Ensure Cordova Android platform
+        run: |
+          npx cordova platform remove android || true
+          npx cordova platform add android@15.0.0
+
+      - name: Build Android debug APK
+        run: npx cordova build android --debug
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ctech-mobile-android-debug
+          path: |
+            platforms/android/app/build/outputs/apk/debug/*.apk
