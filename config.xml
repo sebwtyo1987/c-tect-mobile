@@ -1,39 +1,68 @@
 <?xml version='1.0' encoding='utf-8'?>
-<widget id="com.ctech.mobile" version="1.0.0" xmlns="http://www.w3.org/ns/widgets" xmlns:cdv="http://cordova.apache.org/ns/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+<widget id="com.ctech.mobile" version="1.0.2" xmlns="http://www.w3.org/ns/widgets"
+    xmlns:cdv="http://cordova.apache.org/ns/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android">
     <name>ctech-mobile</name>
     <description>aplikasi client sales untuk ctech</description>
     <author email="tyosebwtyo@gmail.com">
         tyosebwtyo
     </author>
     <content src="index.html" />
-    <icon src="res/icon.png" />
+    <icon src="res/drawable/icon.png" />
+    <!-- status bar color -->
+    <preference name="Fullscreen" value="true" />
+    <preference name="StatusBarOverlaysWebView" value="true" />
+    <preference name="StatusBarBackgroundColor" value="#00000000" />
+    <preference name="StatusBarStyle" value="lightcontent" />
+
+    <!-- Edge to edge -->
+    <preference name="android-windowTranslucentStatus" value="true" />
+    <preference name="android-windowDrawsSystemBarBackgrounds" value="true" />
+    <preference name="AndroidWindowLayoutInDisplayCutoutMode" value="shortEdges" />
+
+
     <platform name="android">
+        <config-file parent="/*" target="app/src/main/AndroidManifest.xml">
+            <uses-permission android:name="android.permission.REQUEST_INSTALL_PACKAGES" />
+        </config-file>
+
+        <config-file parent="/manifest/application" target="app/src/main/AndroidManifest.xml">
+            <meta-data android:name="com.google.firebase.messaging.default_notification_icon" android:resource="@drawable/notification_icon" />
+        </config-file>
+
         <!-- Icons -->
-        <icon density="ldpi" src="res/android/icon/drawable-ldpi-icon.png" />
-        <icon density="mdpi" src="res/android/icon/drawable-mdpi-icon.png" />
-        <icon density="hdpi" src="res/android/icon/drawable-hdpi-icon.png" />
-        <icon density="xhdpi" src="res/android/icon/drawable-xhdpi-icon.png" />
-        <icon density="xxhdpi" src="res/android/icon/drawable-xxhdpi-icon.png" />
-        <icon density="xxxhdpi" src="res/android/icon/drawable-xxxhdpi-icon.png" />
-        
+        <icon density="ldpi" src="res/drawable-ldpi/icon.png" />
+        <icon density="mdpi" src="res/drawable-mdpi/icon.png" />
+        <icon density="hdpi" src="res/drawable-hdpi/icon.png" />
+        <icon density="xhdpi" src="res/drawable-xhdpi/icon.png" />
+        <icon density="xxhdpi" src="res/drawable-xxhdpi/icon.png" />
+        <icon density="xxxhdpi" src="res/drawable-xxxhdpi/icon.png" />
+
         <!-- Notification Icons -->
-        <resource-file src="res/android/notification/drawable-mdpi-icon.png" target="app/src/main/res/drawable-mdpi/notification_icon.png" />
-        <resource-file src="res/android/notification/drawable-hdpi-icon.png" target="app/src/main/res/drawable-hdpi/notification_icon.png" />
-        <resource-file src="res/android/notification/drawable-xhdpi-icon.png" target="app/src/main/res/drawable-xhdpi/notification_icon.png" />
-        <resource-file src="res/android/notification/drawable-xxhdpi-icon.png" target="app/src/main/res/drawable-xxhdpi/notification_icon.png" />
-        <resource-file src="res/android/notification/drawable-xxxhdpi-icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon.png" />
+        <resource-file src="res/drawable-mdpi/icon.png"
+            target="app/src/main/res/drawable-mdpi/notification_icon.png" />
+        <resource-file src="res/drawable-hdpi/icon.png"
+            target="app/src/main/res/drawable-hdpi/notification_icon.png" />
+        <resource-file src="res/drawable-xhdpi/icon.png"
+            target="app/src/main/res/drawable-xhdpi/notification_icon.png" />
+        <resource-file src="res/drawable-xxhdpi/icon.png"
+            target="app/src/main/res/drawable-xxhdpi/notification_icon.png" />
+        <resource-file src="res/drawable-xxxhdpi/icon.png"
+            target="app/src/main/res/drawable-xxxhdpi/notification_icon.png" />
 
         <!-- Large Notification Icon -->
-        <resource-file src="res/icon.png" target="app/src/main/res/drawable-xxxhdpi/notification_icon_large.png" />
-        
+        <resource-file src="res/drawable/icon.png"
+            target="app/src/main/res/drawable/notification_icon_large.png" />
+
         <!-- Sound -->
         <resource-file src="res/raw/notif.mp3" target="app/src/main/res/raw/notif.mp3" />
-        
+
         <!-- Splash Screen -->
-        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="icon" />
-        <preference name="AndroidWindowSplashScreenBackground" value="#FFFFFF" />
+        <preference name="AndroidWindowSplashScreenAnimatedIcon" value="res/drawable/screen.png" />
+        <preference name="SplashScreenBackgroundColor" value="#FFFFFF" />
         <preference name="AndroidWindowSplashScreenDuration" value="3000" />
     </platform>
+    <access origin="https://server.mitraexplore.com" />
     <allow-intent href="http://*/*" />
     <allow-intent href="https://*/*" />
 </widget>
